@@ -1,0 +1,16 @@
+name: is_moderator_bot
+
+services:
+  bot:
+    build: 
+      context: .
+    env_file:
+      - .env
+    restart: always
+    networks:
+      - app-network
+    command: python3 bot/main.py
+
+networks:
+  app-network:
+    driver: bridge
