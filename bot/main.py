@@ -232,6 +232,8 @@ async def listen_all_mesages(update: Update, context: ContextTypes.DEFAULT_TYPE)
 
     if not user.confirmed:
         user_hash = await get_user_hash(user_data=update.message.from_user.to_dict())
+        callback_data = f"user_confirmation_{update.message.from_user.id}"
+        logger.info(f"{callback_data=}")
         message = await update.message.reply_text(
             dedent(
                 f"""
@@ -249,7 +251,7 @@ async def listen_all_mesages(update: Update, context: ContextTypes.DEFAULT_TYPE)
                     [
                         InlineKeyboardButton(
                             text="Я не бот и буду хорошим соседом",
-                            callback_data=f"user_confirmation_{user_hash}",
+                            callback_data=callback_data,
                         )
                     ]
                 ]
@@ -326,16 +328,22 @@ async def listen_all_mesages(update: Update, context: ContextTypes.DEFAULT_TYPE)
 async def confirm_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
     current_user_hash = await get_user_hash(update.callback_query.from_user.to_dict())
     button_user_hash = update.callback_query.data.rsplit("_", 1)[-1]
-    if current_user_hash != button_user_hash:
-        return
-    await cruds.confirm_telegram_user(
-        telegram_user_id=update.callback_query.from_user.id
-    )
-    await update.callback_query.answer()
-    await update.callback_query.edit_message_text(
-        f"{await extract_name(update.callback_query.from_user)}, добро пожаловать!"
-    )
 
+    current_user_id = update.callback_query.from_user.id
+    try:
+        button_user_id = int(update.callback_query.data.rsplit("_", 1)[-1])
+        logger.info(f"{current_user_id=} {button_user_id=}")
+        if button_user_id != current_user_id:
+            return
+        await cruds.confirm_telegram_user(
+            telegram_user_id=update.callback_query.from_user.id
+        )
+        await update.callback_query.answer()
+        await update.callback_query.edit_message_text(
+            f"{await extract_name(update.callback_query.from_user)}, добро пожаловать!"
+        )
+    except ValueError as error:
+        logger.exception(error)
 
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE):
     logger.exception("Ошибка при обработке апдейта", exc_info=context.error)
