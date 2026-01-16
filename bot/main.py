@@ -33,7 +33,6 @@ async def block_user(
     reason: str,
 ):
     until = datetime.now(tz=timezone.utc) + timedelta(days=days)
-    until = datetime.now(tz=timezone.utc) + timedelta(minutes=1)
 
     await context.bot.restrict_chat_member(
         chat_id=chat_id,
@@ -263,7 +262,7 @@ async def listen_all_mesages(update: Update, context: ContextTypes.DEFAULT_TYPE)
                 user_message_id=update.message.message_id,
                 bot_message_id=message.id,
                 context=context,
-                delay_seconds=5,
+                delay_seconds=60,
             )
         )
 
