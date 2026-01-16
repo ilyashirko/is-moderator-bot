@@ -192,7 +192,7 @@ async def warn(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 {await extract_name(update.message.reply_to_message.from_user)},
                 на всякий случай напоминаю о действующих правилах сообщества!
                 
-                https://t.me/friendly_condensed_milk/32
+                https://t.me/\u200bfriendly_condensed_milk/32
             """
         ),
         message_thread_id=settings.MODERATOR_TOPIC_ID,
