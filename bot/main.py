@@ -195,7 +195,7 @@ async def warn(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 Ознакомиться с ними можно в соответствующем разделе "Правила группы"
             """
         ),
-        message_thread_id=settings.MODERATOR_TOPIC_ID,
+        message_thread_id=update.message.message_thread_id,
     )
 
 
