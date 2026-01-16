@@ -22,7 +22,7 @@ async def confirm_telegram_user(telegram_user_id: int | str, db: Database = data
     async with db.session() as session:
         user = await session.get(TelegramUser, telegram_user_id)
         user.confirmed = True
-        session.flush()
+        await session.flush()
         return user
 
 
