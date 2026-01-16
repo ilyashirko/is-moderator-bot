@@ -264,7 +264,7 @@ async def listen_all_mesages(update: Update, context: ContextTypes.DEFAULT_TYPE)
                 user_message_id=update.message.message_id,
                 bot_message_id=message.id,
                 context=context,
-                delay_seconds=30,
+                delay_seconds=60,
             )
         )
 
