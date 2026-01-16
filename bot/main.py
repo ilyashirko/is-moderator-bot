@@ -173,7 +173,7 @@ async def ban(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
     await context.bot.send_message(
         chat_id=update.message.chat_id,
-        text=f"Пользователь {await extract_name(update.message.reply_to_message.from_user)} заблокирован на {days} дней.",
+        text=f"Пользователь {await extract_name(update.message.reply_to_message.from_user)} заблокирован на {days} дн.",
         message_thread_id=settings.MODERATOR_TOPIC_ID,
     )
 
@@ -262,7 +262,7 @@ async def listen_all_mesages(update: Update, context: ContextTypes.DEFAULT_TYPE)
                 user_message_id=update.message.message_id,
                 bot_message_id=message.id,
                 context=context,
-                delay_seconds=60,
+                delay_seconds=30,
             )
         )
 

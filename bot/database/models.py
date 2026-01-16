@@ -26,6 +26,7 @@ class BaseModel(Base):
 class TelegramUser(BaseModel):
     __tablename__ = "telegram_users"
 
+    telegram_id = Column(Text)
     username = Column(String(50))
     first_name = Column(String)
 
