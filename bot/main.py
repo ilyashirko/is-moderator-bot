@@ -191,8 +191,8 @@ async def warn(update: Update, context: ContextTypes.DEFAULT_TYPE):
             f"""
                 {await extract_name(update.message.reply_to_message.from_user)},
                 на всякий случай напоминаю о действующих правилах сообщества!
-                
-                https://t.me/\u200bfriendly_condensed_milk/32
+
+                Ознакомиться с ними можно в соответствующем разделе "Правила группы"
             """
         ),
         message_thread_id=settings.MODERATOR_TOPIC_ID,
@@ -241,9 +241,9 @@ async def listen_all_mesages(update: Update, context: ContextTypes.DEFAULT_TYPE)
 
                 Ты в сообществе "Дружелюбная сгущенка" где чтут порядок и уважение к друг другу (добровольно или принудительно).
                 
-                Ознакомься с правилами сообщества https://t.me/friendly_condensed_milk/32
+                Ознакомься с правилами сообщества можно в разделе "Правила группы"
 
-                но сперва подтверди что ты не бот, чтобы сообщения автоматически не удалялись
+                но сперва подтверди что ты не бот, чтобы сообщения автоматически не удалялись (тык в кнопку ниже)
                 """
             ),
             reply_markup=InlineKeyboardMarkup(
